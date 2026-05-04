@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Masuk | Sistem Pembelajaran Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #f9fafb;
+            min-height: 100vh;
+        }
+        .header {
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-bottom: 1px solid #e9eef3;
+            background: white;
+        }
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #1a1a1a;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        .back-btn:hover {
+            background: #f1f5f9;
+        }
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            color: #0f172a;
+        }
+        .logo span {
+            color: #4f46e5;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+        .card {
+            background: white;
+            border-radius: 32px;
+            padding: 40px 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            border: 1px solid #eef2f6;
+        }
+        .welcome-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .subtitle {
+            color: #6c757d;
+            font-size: 15px;
+            margin-bottom: 32px;
+        }
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 60px;
+            background: white;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .social-btn:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23FFC107' d='M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z'/%3E%3Cpath fill='%23FF3D00' d='M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z'/%3E%3Cpath fill='%234CAF50' d='M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z'/%3E%3Cpath fill='%231976D2' d='M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .facebook-icon {
+            width: 20px;
+            height: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231877F2'%3E%3Cpath d='M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.8V24C19.62 23.1 24 18.1 24 12.07z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        .signin-heading {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #334155;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+            transition: 0.2s;
+            background: #fafcff;
+        }
+        .form-group input:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+        }
+        .btn-continue {
+            width: 100%;
+            background: #0f172a;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 60px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: 0.2s;
+        }
+        .btn-continue:hover {
+            background: #1e293b;
+        }
+        .disclaimer {
+            text-align: center;
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 24px;
+            line-height: 1.5;
+        }
+        .disclaimer a {
+            color: #4f46e5;
+            text-decoration: none;
+        }
+        .bottom-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            font-size: 14px;
+        }
+        .bottom-links a {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        @media (max-width: 500px) {
+            .container { padding: 24px 16px; }
+            .card { padding: 28px 20px; }
+            .welcome-title { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            <i class="ti ti-arrow-left"></i>
+        </button>
+        <div class="logo">Sistem Pembelajaran<span> Digital</span></div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h1 class="welcome-title">Selamat Datang Kembali</h1>
+            <p class="subtitle">Masukkan email Anda untuk masuk ke akun Anda</p>
+
+            <div class="social-buttons">
+                <button class="social-btn" id="googleBtn">
+                    <span class="google-icon"></span> Masuk Dengan Google
+                </button>
+                <button class="social-btn" id="facebookBtn">
+                    <span class="facebook-icon"></span> Masuk Dengan Facebook
+                </button>
+            </div>
+
+            <div class="divider">
+                <div class="divider-line"></div>
+                <span>ATAU</span>
+                <div class="divider-line"></div>
+            </div>
+
+            <div class="signin-heading">MASUK DENGAN EMAIL</div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-continue">Lanjutkan</button>
+            </form>
+
+            <div class="disclaimer">
+                Dengan melanjutkan, Anda menyatakan bahwa Anda telah membaca dan menyetujui 
+                <a href="#">Ketentuan Penggunaan</a> & <a href="#">Kebijakan Privasi</a> kami.
+            </div>
+
+            <div class="bottom-links">
+                <a href="register.html">Belum punya akun? Daftar</a>
+                <a href="#">Lupa kata sandi?</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== LOGIN DENGAN VERIFIKASI LOCALSTORAGE ==========
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                alert('Harap isi email dan password');
+                return;
+            }
+            
+            // Ambil data dari localStorage (yang disimpan saat register)
+            const savedEmail = localStorage.getItem('user_email');
+            const savedPassword = localStorage.getItem('user_password');
+            
+            // DEBUG: Lihat di console
+            console.log('Email tersimpan:', savedEmail);
+            console.log('Password tersimpan:', savedPassword);
+            console.log('Email input:', email);
+            console.log('Password input:', password);
+            
+            // Cek apakah user sudah terdaftar
+            if (!savedEmail || !savedPassword) {
+                alert('Belum ada akun yang terdaftar. Silakan daftar terlebih dahulu.');
+                window.location.href = 'register.html';
+                return;
+            }
+            
+            // Verifikasi email dan password
+            if (email === savedEmail && password === savedPassword) {
+                // Set status login
+                localStorage.setItem('isLoggedIn', 'true');
+                alert('Login berhasil! Selamat belajar.');
+                // Redirect ke dashboard
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Email atau password salah. Silakan coba lagi.');
+            }
+        });
+        
+        // Tombol sosial (demo)
+        document.getElementById('googleBtn').onclick = () => alert('Fitur Google Login akan segera hadir');
+        document.getElementById('facebookBtn').onclick = () => alert('Fitur Facebook Login akan segera hadir');
+    </script>
+</body>
+</html>
