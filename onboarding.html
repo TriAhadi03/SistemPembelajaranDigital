@@ -1,714 +1,523 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mulai Belajar | Sistem Pembelajaran Digital</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
     <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        body{
-            font-family:'Inter',sans-serif;
-            background:linear-gradient(145deg,#f9fafc 0%,#f0f4f8 100%);
-            height:100vh;
-            overflow:hidden;
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #f9fafc 0%, #f0f4f8 100%);
+            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        .header{
-            height:80px;
-            padding:16px 32px;
-            background:rgba(255,255,255,0.8);
-            backdrop-filter:blur(12px);
-            border-bottom:1px solid rgba(0,0,0,0.05);
-            display:flex;
-            align-items:center;
-            gap:20px;
+        .header {
+            padding: 16px 32px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .back-btn {
+            background: rgba(0, 0, 0, 0.04);
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #1e293b;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        .back-btn:hover {
+            background: rgba(79, 70, 229, 0.1);
+            color: #4f46e5;
+            transform: scale(1.02);
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0f172a, #4f46e5);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .logo span {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
         }
 
-        .back-btn{
-            width:44px;
-            height:44px;
-            border:none;
-            border-radius:50%;
-            background:#f1f5f9;
-            cursor:pointer;
-            font-size:22px;
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px 32px;
+            gap: 48px;
+            align-items: flex-start;
+            height: calc(100vh - 80px);
         }
 
-        .logo{
-            font-size:22px;
-            font-weight:700;
-            color:#111827;
+        .avatar-col {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: sticky;
+            top: 24px;
+        }
+        .avatar-wrapper {
+            width: 280px;
+            border-radius: 28px;
+            overflow: hidden;
+            background: transparent;
+            transition: transform 0.3s ease;
+        }
+        .avatar-wrapper:hover {
+            transform: scale(1.02);
+        }
+        .avatar-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 9 / 16;
+            object-fit: cover;
+            display: block;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
         }
 
-        .logo span{
-            color:#4f46e5;
+        .chat-col {
+            flex: 1.5;
+            height: 100%;
+        }
+        .chat-window {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-height: calc(100vh - 120px);
+        }
+        .chat-window:hover {
+            box-shadow: 0 30px 55px -12px rgba(79, 70, 229, 0.2);
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: #ffffff;
+        }
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
         }
 
-        .main-container{
-            display:flex;
-            gap:40px;
-            padding:24px 32px;
-            height:calc(100vh - 80px);
-            max-width:1400px;
-            margin:auto;
+        .message {
+            display: flex;
+            gap: 12px;
+            max-width: 85%;
+            animation: fadeSlideUp 0.3s ease;
         }
-
-        .avatar-col{
-            width:320px;
-            display:flex;
-            justify-content:center;
-        }
-
-        .avatar-wrapper{
-            width:280px;
-        }
-
-        .avatar-video{
-            width:100%;
-            aspect-ratio:9/16;
-            object-fit:cover;
-            border-radius:24px;
-            background:black;
-            box-shadow:0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .chat-col{
-            flex:1;
-        }
-
-        .chat-window{
-            height:100%;
-            background:white;
-            border-radius:30px;
-            overflow:hidden;
-            display:flex;
-            flex-direction:column;
-            box-shadow:0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .chat-messages{
-            flex:1;
-            overflow-y:auto;
-            padding:24px;
-            display:flex;
-            flex-direction:column;
-            gap:16px;
-        }
-
-        .message{
-            display:flex;
-            max-width:85%;
-        }
-
-        .message.bot{
-            align-self:flex-start;
-        }
-
-        .message.user{
-            align-self:flex-end;
-        }
-
-        .bubble{
-            padding:14px 18px;
-            border-radius:22px;
-            font-size:14px;
-            line-height:1.5;
-        }
-
-        .bot .bubble{
-            background:#f1f5f9;
-            color:#111827;
-            border-bottom-left-radius:8px;
-        }
-
-        .user .bubble{
-            background:#4f46e5;
-            color:white;
-            border-bottom-right-radius:8px;
-        }
-
-        .options-panel{
-            margin-top:12px;
-            display:flex;
-            flex-wrap:wrap;
-            gap:10px;
-        }
-
-        .option-chip{
-            border:none;
-            background:white;
-            border:1px solid #cbd5e1;
-            border-radius:999px;
-            padding:10px 16px;
-            cursor:pointer;
-            font-size:13px;
-            transition:0.2s;
-        }
-
-        .option-chip:hover{
-            background:#eef2ff;
-            border-color:#4f46e5;
-        }
-
-        .input-area{
-            padding:18px;
-            border-top:1px solid #e5e7eb;
-            display:flex;
-            gap:12px;
-        }
-
-        .input-area input{
-            flex:1;
-            padding:12px 16px;
-            border-radius:999px;
-            border:1px solid #cbd5e1;
-            outline:none;
-        }
-
-        .input-area button{
-            border:none;
-            background:#111827;
-            color:white;
-            padding:12px 22px;
-            border-radius:999px;
-            cursor:pointer;
-        }
-
-        .hidden{
-            display:none;
-        }
-
-        @media(max-width:768px){
-
-            body{
-                overflow:auto;
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
             }
-
-            .main-container{
-                flex-direction:column;
-                height:auto;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
+        }
+        .message.bot { align-self: flex-start; }
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        .bubble {
+            padding: 10px 16px;
+            border-radius: 22px;
+            font-size: 14px;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+        .bot .bubble {
+            background: #f1f5f9;
+            border-bottom-left-radius: 6px;
+            color: #0f172a;
+        }
+        .user .bubble {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: white;
+            border-bottom-right-radius: 6px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+        }
 
-            .avatar-col{
-                width:100%;
-            }
+        .options-panel {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .option-chip {
+            background: white;
+            border: 1px solid #cbd5e1;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-chip:hover {
+            background: #eef2ff;
+            border-color: #4f46e5;
+            transform: translateY(-2px);
+        }
 
-            .avatar-wrapper{
-                width:220px;
-            }
+        .input-area {
+            border-top: 1px solid #edf2f7;
+            padding: 16px 20px;
+            background: white;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .input-area input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 40px;
+            font-size: 14px;
+            outline: none;
+            background: #fafcff;
+        }
+        .input-area input:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        .input-area button {
+            background: #0f172a;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .input-area button:hover {
+            background: #1e293b;
+            transform: scale(1.02);
+        }
 
-            .chat-window{
-                height:600px;
-            }
+        .typing-dots {
+            display: flex;
+            gap: 5px;
+            padding: 6px 10px;
+        }
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #94a3b8;
+            border-radius: 50%;
+            animation: blink 1.2s infinite;
+        }
+        @keyframes blink {
+            0%, 60%, 100% { opacity: 0.4; transform: translateY(0); }
+            30% { opacity: 1; transform: translateY(-5px); }
+        }
+
+        .hidden { display: none; }
+
+        @media (max-width: 768px) {
+            body { overflow: auto; }
+            .main-container { flex-direction: column; height: auto; padding: 20px; gap: 24px; }
+            .avatar-col { width: 220px; margin: 0 auto; position: static; }
+            .avatar-wrapper { width: 100%; }
+            .chat-window { height: 550px; max-height: 550px; }
+            .message { max-width: 90%; }
         }
     </style>
 </head>
-
 <body>
-
     <div class="header">
         <button class="back-btn" id="resetBtn">←</button>
-        <div class="logo">
-            Sistem Pembelajaran <span>Digital</span>
-        </div>
+        <div class="logo">Sistem Pembelajaran <span>Digital</span></div>
     </div>
-
     <div class="main-container">
-
         <div class="avatar-col">
             <div class="avatar-wrapper">
-
-                <video
-                    id="avatarVideo"
-                    class="avatar-video"
-                    autoplay
-                    muted
-                    playsinline
-                    webkit-playsinline
-                >
-                </video>
-
+                <video id="avatarVideo" class="avatar-video"></video>
             </div>
         </div>
-
         <div class="chat-col">
-
             <div class="chat-window">
-
                 <div class="chat-messages" id="chatMessages"></div>
-
                 <div class="input-area hidden" id="textInputArea">
-                    <input
-                        type="text"
-                        id="textAnswer"
-                        placeholder="Ketik jawaban..."
-                    />
-
-                    <button id="sendTextBtn">
-                        Kirim
-                    </button>
+                    <input type="text" id="textAnswer" placeholder="Ketik jawaban..." autocomplete="off">
+                    <button id="sendTextBtn">Kirim</button>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
-<script>
+    <script>
+        const avatarVideo = document.getElementById('avatarVideo');
 
-const avatarVideo = document.getElementById("avatarVideo");
-
-function getVideoFile(questionText, title = null){
-
-    if(questionText.includes("Halo")){
-        return "sapaan.mp4";
-    }
-
-    if(questionText === "Hari ini kamu teh mau belajar apa?"){
-        return "kelas.mp4";
-    }
-
-    if(title === "UI/UX Design" && questionText.includes("Di UI/UX Design")){
-        return "subtopik_uiux.mp4";
-    }
-
-    if(questionText === "Kamu ingin fokus ka bagian mana?"){
-        return "fokus_uiux.mp4";
-    }
-
-    if(questionText.includes("Tujuan kamu belajar UI/UX")){
-        return "tujuan_uiux.mp4";
-    }
-
-    if(questionText.includes("Mangga tentukeun tingkat")){
-        return "level.mp4";
-    }
-
-    if(questionText.includes("Saat ieu")){
-        return "pendidikan.mp4";
-    }
-
-    if(questionText.includes("Selesai Mangga Isi nama")){
-        return "nama.mp4";
-    }
-
-    return null;
-}
-
-function playVideo(file, muted = true, onFinished = null){
-
-    if(!file){
-        if(onFinished) onFinished();
-        return;
-    }
-
-    const fullPath = `./Video/${file}`;
-
-    console.log("PLAY:", fullPath);
-
-    avatarVideo.pause();
-
-    avatarVideo.innerHTML = `
-        <source src="${fullPath}" type="video/mp4">
-    `;
-
-    avatarVideo.load();
-
-    avatarVideo.currentTime = 0;
-    avatarVideo.muted = muted;
-    avatarVideo.autoplay = true;
-    avatarVideo.loop = false;
-
-    avatarVideo.onended = () => {
-
-        console.log("SELESAI:", file);
-
-        if(onFinished){
-            onFinished();
+        function getVideoFile(questionText, title = null) {
+            if (questionText.includes('Halo, ini adalah Sistem Pembelajaran Digital')) return 'sapaan.mp4';
+            if (questionText === 'Hari ini kamu teh mau belajar apa?') return 'kelas.mp4';
+            if (title === 'UI/UX Design' && questionText.includes('Di UI/UX Design ini')) return 'subtopik_uiux.mp4';
+            if (questionText === 'Kamu ingin fokus ka bagian mana?') return 'fokus_uiux.mp4';
+            if (questionText === 'Tujuan kamu belajar UI/UX Design teh naon?') return 'tujuan_uiux.mp4';
+            if (questionText.includes('Mangga tentukeun tingkat kemampuan')) return 'level.mp4';
+            if (questionText.includes('Saat ieu, tingkat pendidikan kamu teh naon?')) return 'pendidikan.mp4';
+            if (questionText.includes('Selesai Mangga Isi nama')) return 'nama.mp4';
+            return null;
         }
-    };
 
-    avatarVideo.onerror = () => {
-
-        console.error("VIDEO ERROR:", fullPath);
-
-        if(onFinished){
-            onFinished();
-        }
-    };
-
-    const promise = avatarVideo.play();
-
-    if(promise !== undefined){
-
-        promise
-            .then(() => {
-                console.log("VIDEO BERHASIL");
-            })
-            .catch((err) => {
-                console.error("AUTOPLAY GAGAL:", err);
-            });
-    }
-}
-
-const kelasQuestion = {
-
-    type:"options",
-
-    text:"Hari ini kamu teh mau belajar apa?",
-
-    options:[
-        "Front-End Development",
-        "Back-End Development",
-        "Data Science",
-        "Cyber Security",
-        "Mobile Developer",
-        "Network Engineer",
-        "UI/UX Design",
-        "AI Engineer",
-        "Full Stack Developer"
-    ],
-
-    field:"kelas"
-};
-
-function generateDynamicQuestions(selectedClass){
-
-    if(selectedClass === "UI/UX Design"){
-
-        return [
-
-            {
-                type:"options",
-                title:"UI/UX Design",
-                text:"Di UI/UX Design ini, hal naon yang ingin kamu pelajari?",
-                options:[
-                    "Dasar UI/UX",
-                    "User Research",
-                    "Wireframing & prototyping (Figma)",
-                    "Design Aplikasi"
-                ],
-                field:"subtopik"
-            },
-
-            {
-                type:"options",
-                text:"Kamu ingin fokus ka bagian mana?",
-                options:[
-                    "UI Design (Visual)",
-                    "UX Research"
-                ],
-                field:"fokus"
+        function playVideo(file, muted, onFinished) {
+            if (!file) {
+                if (onFinished) onFinished();
+                return;
             }
-        ];
-    }
-
-    return [];
-}
-
-const commonQuestions = [
-
-    {
-        type:"options",
-        text:"Mangga tentukeun tingkat kemampuan anu bade kamu pelajari",
-        options:[
-            "Pemula",
-            "Menengah",
-            "Lanjut"
-        ],
-        field:"level"
-    },
-
-    {
-        type:"text",
-        text:"Selesai Mangga Isi nama Akang atau teteh untuk membuat akun",
-        placeholder:"Ketik nama anda",
-        field:"nama"
-    }
-];
-
-let currentQuestions = [];
-let currentStepIndex = 0;
-let answers = {};
-let waitingForStart = true;
-
-const chatDiv = document.getElementById("chatMessages");
-const textAreaDiv = document.getElementById("textInputArea");
-const textInput = document.getElementById("textAnswer");
-const sendTextBtn = document.getElementById("sendTextBtn");
-
-function addBotMessage(msg, title = null, playVideoFlag = true){
-
-    const div = document.createElement("div");
-
-    div.className = "message bot";
-
-    let content = msg;
-
-    if(title){
-
-        content = `
-            <strong style="color:#4f46e5;">
-                ${title}
-            </strong>
-            <br><br>
-            ${msg}
-        `;
-    }
-
-    div.innerHTML = `
-        <div class="bubble">
-            ${content}
-        </div>
-    `;
-
-    chatDiv.appendChild(div);
-
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-
-    if(playVideoFlag && !waitingForStart){
-
-        const videoFile = getVideoFile(msg, title);
-
-        if(videoFile){
-
-            playVideo(videoFile, true, null);
+            avatarVideo.pause();
+            avatarVideo.src = `video/${file}`;
+            avatarVideo.muted = muted;
+            avatarVideo.loop = false;
+            avatarVideo.onended = () => {
+                if (onFinished) onFinished();
+            };
+            avatarVideo.onerror = () => {
+                console.warn(`Video ${file} tidak ditemukan`);
+                if (onFinished) onFinished();
+            };
+            avatarVideo.play().catch(e => console.warn(`Gagal memutar ${file}:`, e));
         }
-    }
-}
 
-function addUserMessage(msg){
+        // ========== LOGIKA PERTANYAAN ==========
+        const kelasQuestion = {
+            type: 'options',
+            text: 'Hari ini kamu teh mau belajar apa?',
+            options: ['Front-End Development', 'Back-End Development', 'Data Science', 'Cyber Security', 'Mobile Developer', 'Network Engineer', 'UI/UX Design', 'AI Engineer', 'Full Stack Developer'],
+            field: 'kelas'
+        };
 
-    const div = document.createElement("div");
+        function generateDynamicQuestions(selectedClass) {
+            if (selectedClass === 'UI/UX Design') {
+                return [
+                    { type: 'options', title: 'UI/UX Design', text: 'Di UI/UX Design ini, hal naon yang ingin kamu pelajari?', options: ['Dasar UI/UX', 'User Research', 'Wireframing & prototyping (Figma)', 'Design Aplikasi'], field: 'subtopik' },
+                    { type: 'options', text: 'Kamu ingin fokus ka bagian mana?', options: ['UI Design (Visual)', 'UX Research'], field: 'fokus' },
+                    { type: 'options', text: 'Tujuan kamu belajar UI/UX Design teh naon?', options: ['Ingin membangun Portfolio', 'Asah skill individu', 'Untuk Project Pribadi', 'Membangun aplikasi sendiri', 'Ingin Belajar untuk bisa memahami materi kuliah', 'Sekedar ingin mempelajari saja'], field: 'tujuan' }
+                ];
+            } else {
+                return [
+                    { type: 'options', text: `Di ${selectedClass} ini, hal naon yang ingin kamu pelajari?*`, options: ['Dasar-dasar', 'Teknik lanjutan', 'Studi kasus', 'Proyek nyata'], field: 'subtopik' },
+                    { type: 'options', text: `Kamu ingin fokus ka bagian mana di ${selectedClass}?`, options: ['Teori', 'Praktik', 'Keduanya'], field: 'fokus' },
+                    { type: 'options', text: `Tujuan kamu belajar ${selectedClass} teh naon?`, options: ['Membangun Portfolio', 'Asah skill individu', 'Untuk Project Pribadi', 'Membangun aplikasi sendiri', 'Ingin Belajar untuk bisa memahami materi kuliah', 'Sekedar ingin mempelajari saja'], field: 'tujuan' }
+                ];
+            }
+        }
 
-    div.className = "message user";
+        const commonQuestions = [
+            { type: 'options', text: 'Mangga tentukeun tingkat kemampuan anu bade kamu pelajari', options: ['Pemula - Mulai dari dasar...', 'Menengah - Pendalam pemahaman...', 'Lanjut - Hadapi tantangan kompleks...', 'Mahir - Capai penggunaan penuh...'], field: 'level' },
+            { type: 'options', text: 'Saat ieu, tingkat pendidikan kamu teh naon?', options: ['S1', 'S2', 'S3'], field: 'pendidikan' },
+            { type: 'text', text: 'Selesai Mangga Isi nama Akang atau teteh untuk membuat akun', placeholder: 'Ketik nama anda', field: 'nama' }
+        ];
 
-    div.innerHTML = `
-        <div class="bubble">
-            ${msg}
-        </div>
-    `;
+        let currentQuestions = [];
+        let currentStepIndex = 0;
+        let answers = {};
+        let waitingForStart = true;
 
-    chatDiv.appendChild(div);
+        const chatDiv = document.getElementById('chatMessages');
+        const textAreaDiv = document.getElementById('textInputArea');
+        const textInput = document.getElementById('textAnswer');
+        const sendTextBtn = document.getElementById('sendTextBtn');
 
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-}
+        function showTyping(cb) {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot';
+            typingDiv.id = 'tempTyping';
+            typingDiv.innerHTML = `<div class="bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+            chatDiv.appendChild(typingDiv);
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+            setTimeout(() => {
+                document.getElementById('tempTyping')?.remove();
+                if (cb) cb();
+            }, 500);
+        }
 
-function showOptions(options, onSelect){
+        function addBotMessage(msg, title = null, playVideoFlag = true) {
+            const div = document.createElement('div');
+            div.className = 'message bot';
+            let content = msg;
+            if (title) content = `<strong style="color:#4f46e5;">${title}</strong><br><br>${msg}`;
+            div.innerHTML = `<div class="bubble">${content}</div>`;
+            chatDiv.appendChild(div);
+            chatDiv.scrollTop = chatDiv.scrollHeight;
 
-    const container = document.createElement("div");
+            if (playVideoFlag && !waitingForStart) {
+                const videoFile = getVideoFile(msg, title);
+                if (videoFile) playVideo(videoFile, false, null);
+            }
+        }
 
-    container.className = "message bot";
+        function addUserMessage(msg) {
+            const div = document.createElement('div');
+            div.className = 'message user';
+            div.innerHTML = `<div class="bubble">${msg}</div>`;
+            chatDiv.appendChild(div);
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+            avatarVideo.pause();
+        }
 
-    container.innerHTML = `
-        <div class="bubble">
-            <div class="options-panel">
+        function showOptions(options, onSelect) {
+            const container = document.createElement('div');
+            container.className = 'message bot';
+            const btns = options.map(opt => `<button class="option-chip" data-val="${opt.replace(/"/g, '&quot;')}">${opt}</button>`).join('');
+            container.innerHTML = `<div class="bubble"><div class="options-panel">${btns}</div></div>`;
+            chatDiv.appendChild(container);
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+            container.querySelectorAll('.option-chip').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const val = btn.getAttribute('data-val');
+                    container.remove();
+                    onSelect(val);
+                });
+            });
+        }
 
-                ${options.map(opt => `
-                    <button
-                        class="option-chip"
-                        data-value="${opt}"
-                    >
-                        ${opt}
-                    </button>
-                `).join("")}
+        function askNextQuestion() {
+            if (currentStepIndex >= currentQuestions.length) {
+                if (answers.kelas) localStorage.setItem('user_selected_class', answers.kelas);
+                if (answers.subtopik) localStorage.setItem('user_selected_subtopik', answers.subtopik);
+                if (answers.fokus) localStorage.setItem('user_selected_fokus', answers.fokus);
+                if (answers.tujuan) localStorage.setItem('user_selected_tujuan', answers.tujuan);
+                if (answers.level) localStorage.setItem('user_selected_level', answers.level);
+                if (answers.pendidikan) localStorage.setItem('user_selected_pendidikan', answers.pendidikan);
+                
+                const nama = answers.nama || 'Pengguna';
+                localStorage.setItem('asynchronous_user_name', nama);
+                window.location.href = `register.html?nama=${encodeURIComponent(nama)}`;
+                return;
+            }
+            const q = currentQuestions[currentStepIndex];
+            if (q.type === 'options') {
+                showTyping(() => {
+                    addBotMessage(q.text, q.title || null, true);
+                    showOptions(q.options, (selected) => {
+                        addUserMessage(selected);
+                        answers[q.field] = selected;
+                        currentStepIndex++;
+                        askNextQuestion();
+                    });
+                });
+            } else if (q.type === 'text') {
+                showTyping(() => {
+                    addBotMessage(q.text, null, true);
+                    textAreaDiv.classList.remove('hidden');
+                    textInput.placeholder = q.placeholder || 'Ketik jawaban...';
+                    textInput.value = '';
+                    textInput.focus();
+                    window.currentTextQ = q;
+                });
+            }
+        }
 
-            </div>
-        </div>
-    `;
+        function startOnboarding() {
+            if (!waitingForStart) return;
+            waitingForStart = false;
+            addUserMessage("START");
+            playVideo('sapaan.mp4', false, () => {
+                showTyping(() => {
+                    addBotMessage(kelasQuestion.text, kelasQuestion.title || null, true);
+                    showOptions(kelasQuestion.options, (selected) => {
+                        addUserMessage(selected);
+                        answers[kelasQuestion.field] = selected;
+                        const dynamic = generateDynamicQuestions(selected);
+                        currentQuestions = [...dynamic, ...commonQuestions];
+                        currentStepIndex = 0;
+                        askNextQuestion();
+                    });
+                });
+            });
+        }
 
-    chatDiv.appendChild(container);
-
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-
-    container.querySelectorAll(".option-chip").forEach(btn => {
-
-        btn.addEventListener("click", () => {
-
-            const val = btn.dataset.value;
-
-            container.remove();
-
-            onSelect(val);
-        });
-    });
-}
-
-function askNextQuestion(){
-
-    if(currentStepIndex >= currentQuestions.length){
-
-        const nama = answers.nama || "Pengguna";
-
-        window.location.href =
-            `register.html?nama=${encodeURIComponent(nama)}`;
-
-        return;
-    }
-
-    const q = currentQuestions[currentStepIndex];
-
-    addBotMessage(q.text, q.title || null, true);
-
-    if(q.type === "options"){
-
-        showOptions(q.options, (selected) => {
-
-            addUserMessage(selected);
-
-            answers[q.field] = selected;
-
-            currentStepIndex++;
-
-            askNextQuestion();
-        });
-    }
-
-    else if(q.type === "text"){
-
-        textAreaDiv.classList.remove("hidden");
-
-        textInput.placeholder = q.placeholder;
-
-        textInput.value = "";
-
-        textInput.focus();
-
-        window.currentTextQ = q;
-    }
-}
-
-function startOnboarding(){
-
-    if(!waitingForStart){
-        return;
-    }
-
-    waitingForStart = false;
-
-    addUserMessage("START");
-
-    playVideo("sapaan.mp4", true, () => {
-
-        addBotMessage(kelasQuestion.text);
-
-        showOptions(kelasQuestion.options, (selected) => {
-
-            addUserMessage(selected);
-
-            answers[kelasQuestion.field] = selected;
-
-            const dynamic =
-                generateDynamicQuestions(selected);
-
-            currentQuestions = [
-                ...dynamic,
-                ...commonQuestions
-            ];
-
+        function resetConversation() {
+            avatarVideo.pause();
+            avatarVideo.src = '';
+            chatDiv.innerHTML = '';
+            answers = {};
+            waitingForStart = true;
+            textAreaDiv.classList.add('hidden');
+            currentQuestions = [];
             currentStepIndex = 0;
+            const div = document.createElement('div');
+            div.className = 'message bot';
+            div.innerHTML = `<div class="bubble">Halo, ini adalah Sistem Pembelajaran Digital!<br>Sudah siap untuk diajar?<br><div class="options-panel" style="margin-top:12px;"><button class="option-chip" id="startChipBtn">🚀 START</button></div></div>`;
+            chatDiv.appendChild(div);
+            const startBtn = document.getElementById('startChipBtn');
+            if (startBtn) {
+                startBtn.addEventListener('click', startOnboarding);
+            } else {
+                setTimeout(() => {
+                    const btn = document.getElementById('startChipBtn');
+                    if (btn) btn.addEventListener('click', startOnboarding);
+                }, 100);
+            }
+            playVideo('sapaan.mp4', true, null);
+        }
 
-            askNextQuestion();
+        document.getElementById('resetBtn').addEventListener('click', resetConversation);
+        sendTextBtn.addEventListener('click', () => {
+            const answer = textInput.value.trim();
+            if (!answer) return;
+            const q = window.currentTextQ;
+            if (!q) return;
+            addUserMessage(answer);
+            answers[q.field] = answer;
+            textAreaDiv.classList.add('hidden');
+            currentStepIndex++;
+            setTimeout(() => askNextQuestion(), 300);
         });
-    });
-}
+        textInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendTextBtn.click();
+        });
 
-function resetConversation(){
-
-    avatarVideo.pause();
-
-    avatarVideo.src = "";
-
-    chatDiv.innerHTML = "";
-
-    answers = {};
-
-    waitingForStart = true;
-
-    currentQuestions = [];
-
-    currentStepIndex = 0;
-
-    textAreaDiv.classList.add("hidden");
-
-    const div = document.createElement("div");
-
-    div.className = "message bot";
-
-    div.innerHTML = `
-        <div class="bubble">
-
-            Halo, ini adalah Sistem Pembelajaran Digital!
-            <br><br>
-
-            <button
-                class="option-chip"
-                id="startChipBtn"
-            >
-                🚀 START
-            </button>
-
-        </div>
-    `;
-
-    chatDiv.appendChild(div);
-
-    document
-        .getElementById("startChipBtn")
-        .addEventListener("click", startOnboarding);
-
-    playVideo("sapaan.mp4", true, null);
-}
-
-document
-    .getElementById("resetBtn")
-    .addEventListener("click", resetConversation);
-
-sendTextBtn.addEventListener("click", () => {
-
-    const answer = textInput.value.trim();
-
-    if(!answer){
-        return;
-    }
-
-    const q = window.currentTextQ;
-
-    if(!q){
-        return;
-    }
-
-    addUserMessage(answer);
-
-    answers[q.field] = answer;
-
-    textAreaDiv.classList.add("hidden");
-
-    currentStepIndex++;
-
-    askNextQuestion();
-});
-
-textInput.addEventListener("keypress", (e) => {
-
-    if(e.key === "Enter"){
-
-        sendTextBtn.click();
-    }
-});
-
-resetConversation();
-
-</script>
-
+        resetConversation();
+    </script>
 </body>
 </html>
