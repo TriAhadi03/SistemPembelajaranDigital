@@ -17,10 +17,12 @@
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background: linear-gradient(145deg, #f9fafc 0%, #f0f4f8 100%);
             min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
         }
 
         .header {
-            padding: 20px 40px;
+            padding: 16px 32px;
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -67,20 +69,23 @@
 
         .main-container {
             display: flex;
-            max-width: 1300px;
-            margin-left: 6%;
-            padding: 48px 32px;
-            gap: 56px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px 32px;
+            gap: 48px;
             align-items: flex-start;
+            height: calc(100vh - 80px);
         }
 
         .avatar-col {
             flex: 1;
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
+            position: sticky;
+            top: 24px;
         }
         .avatar-wrapper {
-            width: 300px;
+            width: 280px;
             border-radius: 28px;
             overflow: hidden;
             background: transparent;
@@ -100,29 +105,30 @@
         }
 
         .chat-col {
-            flex: 1.3;
+            flex: 1.5;
+            height: 100%;
         }
         .chat-window {
             background: white;
-            border-radius: 36px;
+            border-radius: 32px;
             box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(0, 0, 0, 0.05);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 620px;
-            transition: box-shadow 0.3s;
+            height: 100%;
+            max-height: calc(100vh - 120px);
         }
         .chat-window:hover {
             box-shadow: 0 30px 55px -12px rgba(79, 70, 229, 0.2);
         }
         .chat-messages {
             flex: 1;
-            padding: 28px 24px;
+            padding: 24px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
             background: #ffffff;
         }
         .chat-messages::-webkit-scrollbar {
@@ -139,7 +145,7 @@
 
         .message {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             max-width: 85%;
             animation: fadeSlideUp 0.3s ease;
         }
@@ -159,54 +165,50 @@
             flex-direction: row-reverse;
         }
         .bubble {
-            padding: 12px 18px;
-            border-radius: 26px;
+            padding: 10px 16px;
+            border-radius: 22px;
             font-size: 14px;
             line-height: 1.5;
             word-break: break-word;
-            transition: all 0.2s;
         }
         .bot .bubble {
             background: #f1f5f9;
-            border-bottom-left-radius: 8px;
+            border-bottom-left-radius: 6px;
             color: #0f172a;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
         .user .bubble {
             background: linear-gradient(135deg, #4f46e5, #6366f1);
             color: white;
-            border-bottom-right-radius: 8px;
+            border-bottom-right-radius: 6px;
             box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
         }
 
         .options-panel {
-            margin-top: 14px;
+            margin-top: 12px;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
         .option-chip {
             background: white;
-            border: 1px solid #e2e8f0;
-            padding: 8px 18px;
-            border-radius: 60px;
+            border: 1px solid #cbd5e1;
+            padding: 8px 16px;
+            border-radius: 40px;
             font-size: 13px;
             font-weight: 500;
             color: #1e293b;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
         .option-chip:hover {
             background: #eef2ff;
-            border-color: #a5b4fc;
+            border-color: #4f46e5;
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px -8px rgba(79,70,229,0.3);
         }
 
         .input-area {
             border-top: 1px solid #edf2f7;
-            padding: 18px 24px;
+            padding: 16px 20px;
             background: white;
             display: flex;
             gap: 12px;
@@ -214,23 +216,22 @@
         }
         .input-area input {
             flex: 1;
-            padding: 12px 18px;
-            border: 1px solid #e2e8f0;
-            border-radius: 60px;
+            padding: 12px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 40px;
             font-size: 14px;
             outline: none;
-            transition: all 0.2s;
             background: #fafcff;
         }
         .input-area input:focus {
             border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
         }
         .input-area button {
             background: #0f172a;
             border: none;
             padding: 10px 24px;
-            border-radius: 60px;
+            border-radius: 40px;
             color: white;
             font-weight: 600;
             cursor: pointer;
@@ -243,8 +244,8 @@
 
         .typing-dots {
             display: flex;
-            gap: 6px;
-            padding: 8px 12px;
+            gap: 5px;
+            padding: 6px 10px;
         }
         .typing-dots span {
             width: 8px;
@@ -255,17 +256,17 @@
         }
         @keyframes blink {
             0%, 60%, 100% { opacity: 0.4; transform: translateY(0); }
-            30% { opacity: 1; transform: translateY(-6px); }
+            30% { opacity: 1; transform: translateY(-5px); }
         }
 
         .hidden { display: none; }
 
         @media (max-width: 768px) {
-            .header { padding: 16px 20px; }
-            .main-container { flex-direction: column; margin-left: 5%; margin-right: 5%; padding: 24px; gap: 32px; align-items: center; }
-            .avatar-col { justify-content: center; width: 260px; }
+            body { overflow: auto; }
+            .main-container { flex-direction: column; height: auto; padding: 20px; gap: 24px; }
+            .avatar-col { width: 220px; margin: 0 auto; position: static; }
             .avatar-wrapper { width: 100%; }
-            .chat-window { height: 520px; width: 100%; }
+            .chat-window { height: 550px; max-height: 550px; }
             .message { max-width: 90%; }
         }
     </style>
@@ -313,7 +314,7 @@
                 return;
             }
             avatarVideo.pause();
-            avatarVideo.src = `video/${file}`;
+            avatarVideo.src = `Video/${file}`;
             avatarVideo.muted = muted;
             avatarVideo.loop = false;
             avatarVideo.onended = () => {
@@ -421,7 +422,6 @@
 
         function askNextQuestion() {
             if (currentStepIndex >= currentQuestions.length) {
-                // ========== SIMPAN SEMUA DATA KE LOCALSTORAGE ==========
                 if (answers.kelas) localStorage.setItem('user_selected_class', answers.kelas);
                 if (answers.subtopik) localStorage.setItem('user_selected_subtopik', answers.subtopik);
                 if (answers.fokus) localStorage.setItem('user_selected_fokus', answers.fokus);
@@ -487,7 +487,7 @@
             currentStepIndex = 0;
             const div = document.createElement('div');
             div.className = 'message bot';
-            div.innerHTML = `<div class="bubble">Halo, ini adalah Sistem Pembelajaran Digital!<br>Sudah siap untuk diajar? Mangga pencet start untuk memulai<br><div class="options-panel" style="margin-top:12px;"><button class="option-chip" id="startChipBtn">🚀 START</button></div></div>`;
+            div.innerHTML = `<div class="bubble">Halo, ini adalah Sistem Pembelajaran Digital!<br>Sudah siap untuk diajar?<br><div class="options-panel" style="margin-top:12px;"><button class="option-chip" id="startChipBtn">🚀 START</button></div></div>`;
             chatDiv.appendChild(div);
             const startBtn = document.getElementById('startChipBtn');
             if (startBtn) {
