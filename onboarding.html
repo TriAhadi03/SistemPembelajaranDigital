@@ -7,16 +7,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background: linear-gradient(145deg, #f9fafc 0%, #f0f4f8 100%);
             min-height: 100vh;
-            height: 100vh;
-            overflow: hidden;
         }
+
         .header {
-            padding: 16px 32px;
+            padding: 20px 40px;
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -60,125 +64,149 @@
             -webkit-background-clip: text;
             color: transparent;
         }
+
         .main-container {
             display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 24px 32px;
-            gap: 48px;
+            max-width: 1300px;
+            margin-left: 6%;
+            padding: 48px 32px;
+            gap: 56px;
             align-items: flex-start;
-            height: calc(100vh - 80px);
         }
+
         .avatar-col {
             flex: 1;
             display: flex;
-            justify-content: center;
-            position: relative;
+            justify-content: flex-start;
         }
         .avatar-wrapper {
             width: 300px;
             border-radius: 28px;
             overflow: hidden;
-            background: #1e1b4b;
-            position: relative;
+            background: transparent;
+            transition: transform 0.3s ease;
+        }
+        .avatar-wrapper:hover {
+            transform: scale(1.02);
         }
         .avatar-video {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: auto;
             aspect-ratio: 9 / 16;
             object-fit: cover;
+            display: block;
             border-radius: 28px;
             box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
         }
-        .avatar-video-placeholder {
-            width: 100%;
-            aspect-ratio: 9 / 16;
-            background: #1e1b4b;
-            border-radius: 28px;
-        }
+
         .chat-col {
-            flex: 1.5;
-            height: 100%;
+            flex: 1.3;
         }
         .chat-window {
             background: white;
-            border-radius: 32px;
+            border-radius: 36px;
             box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(0, 0, 0, 0.05);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 100%;
-            max-height: calc(100vh - 120px);
+            height: 620px;
+            transition: box-shadow 0.3s;
+        }
+        .chat-window:hover {
+            box-shadow: 0 30px 55px -12px rgba(79, 70, 229, 0.2);
         }
         .chat-messages {
             flex: 1;
-            padding: 24px;
+            padding: 28px 24px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 20px;
             background: #ffffff;
         }
-        .chat-messages::-webkit-scrollbar { width: 6px; }
-        .chat-messages::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-        .chat-messages::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
         .message {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             max-width: 85%;
             animation: fadeSlideUp 0.3s ease;
         }
         @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .message.bot { align-self: flex-start; }
-        .message.user { align-self: flex-end; flex-direction: row-reverse; }
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
         .bubble {
-            padding: 10px 16px;
-            border-radius: 22px;
+            padding: 12px 18px;
+            border-radius: 26px;
             font-size: 14px;
             line-height: 1.5;
+            word-break: break-word;
+            transition: all 0.2s;
         }
         .bot .bubble {
             background: #f1f5f9;
-            border-bottom-left-radius: 6px;
+            border-bottom-left-radius: 8px;
             color: #0f172a;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
         .user .bubble {
             background: linear-gradient(135deg, #4f46e5, #6366f1);
             color: white;
-            border-bottom-right-radius: 6px;
+            border-bottom-right-radius: 8px;
             box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
         }
+
         .options-panel {
-            margin-top: 12px;
+            margin-top: 14px;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
         .option-chip {
             background: white;
-            border: 1px solid #cbd5e1;
-            padding: 8px 16px;
-            border-radius: 40px;
+            border: 1px solid #e2e8f0;
+            padding: 8px 18px;
+            border-radius: 60px;
             font-size: 13px;
             font-weight: 500;
+            color: #1e293b;
             cursor: pointer;
             transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
         .option-chip:hover {
             background: #eef2ff;
-            border-color: #4f46e5;
+            border-color: #a5b4fc;
             transform: translateY(-2px);
+            box-shadow: 0 6px 12px -8px rgba(79,70,229,0.3);
         }
+
         .input-area {
             border-top: 1px solid #edf2f7;
-            padding: 16px 20px;
+            padding: 18px 24px;
             background: white;
             display: flex;
             gap: 12px;
@@ -186,33 +214,37 @@
         }
         .input-area input {
             flex: 1;
-            padding: 12px 16px;
-            border: 1px solid #cbd5e1;
-            border-radius: 40px;
+            padding: 12px 18px;
+            border: 1px solid #e2e8f0;
+            border-radius: 60px;
             font-size: 14px;
             outline: none;
+            transition: all 0.2s;
+            background: #fafcff;
         }
         .input-area input:focus {
             border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
         }
         .input-area button {
             background: #0f172a;
             border: none;
             padding: 10px 24px;
-            border-radius: 40px;
+            border-radius: 60px;
             color: white;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.2s;
         }
         .input-area button:hover {
             background: #1e293b;
             transform: scale(1.02);
         }
+
         .typing-dots {
             display: flex;
-            gap: 5px;
-            padding: 6px 10px;
+            gap: 6px;
+            padding: 8px 12px;
         }
         .typing-dots span {
             width: 8px;
@@ -223,15 +255,17 @@
         }
         @keyframes blink {
             0%, 60%, 100% { opacity: 0.4; transform: translateY(0); }
-            30% { opacity: 1; transform: translateY(-5px); }
+            30% { opacity: 1; transform: translateY(-6px); }
         }
+
         .hidden { display: none; }
+
         @media (max-width: 768px) {
-            body { overflow: auto; }
-            .main-container { flex-direction: column; height: auto; padding: 20px; gap: 24px; }
-            .avatar-col { width: 220px; margin: 0 auto; }
+            .header { padding: 16px 20px; }
+            .main-container { flex-direction: column; margin-left: 5%; margin-right: 5%; padding: 24px; gap: 32px; align-items: center; }
+            .avatar-col { justify-content: center; width: 260px; }
             .avatar-wrapper { width: 100%; }
-            .chat-window { height: 550px; max-height: 550px; }
+            .chat-window { height: 520px; width: 100%; }
             .message { max-width: 90%; }
         }
     </style>
@@ -244,9 +278,7 @@
     <div class="main-container">
         <div class="avatar-col">
             <div class="avatar-wrapper">
-                <div class="avatar-video-placeholder"></div>
-                <video id="videoA" class="avatar-video" style="z-index: 2;"></video>
-                <video id="videoB" class="avatar-video" style="z-index: 1;"></video>
+                <video id="avatarVideo" class="avatar-video"></video>
             </div>
         </div>
         <div class="chat-col">
@@ -261,90 +293,10 @@
     </div>
 
     <script>
-        // ========== PRELOAD SEMUA VIDEO ==========
-        const videoList = ['sapaan.mp4', 'kelas.mp4', 'subtopik_uiux.mp4', 'fokus_uiux.mp4', 'tujuan_uiux.mp4', 'level.mp4', 'pendidikan.mp4', 'nama.mp4'];
-        const videoCache = {};
-        
-        videoList.forEach(file => {
-            const v = document.createElement('video');
-            v.preload = 'auto';
-            v.src = `video/${file}`;
-            v.load();
-            videoCache[file] = v;
-        });
+        const avatarVideo = document.getElementById('avatarVideo');
 
-        const videoA = document.getElementById('videoA');
-        const videoB = document.getElementById('videoB');
-        let activeIsA = true;   // true: A aktif, B buffer; false: B aktif, A buffer
-        let pendingCallback = null;
-        let switching = false;
-
-        function prepareSwitch(file, muted, callback) {
-            const cached = videoCache[file];
-            if (!cached) {
-                if (callback) callback();
-                return;
-            }
-            const bufferVideo = activeIsA ? videoB : videoA;
-            // Salin dari cache ke buffer (preload sudah bikin instant)
-            bufferVideo.src = cached.src;
-            bufferVideo.muted = muted;
-            bufferVideo.currentTime = 0;
-            bufferVideo.load();
-            
-            const onReady = () => {
-                bufferVideo.removeEventListener('canplaythrough', onReady);
-                // Tukar z-index
-                if (activeIsA) {
-                    videoB.style.zIndex = 3;
-                    videoA.style.zIndex = 1;
-                    videoA.pause();
-                    videoB.play().catch(e=>console.warn);
-                } else {
-                    videoA.style.zIndex = 3;
-                    videoB.style.zIndex = 1;
-                    videoB.pause();
-                    videoA.play().catch(e=>console.warn);
-                }
-                activeIsA = !activeIsA;
-                switching = false;
-                if (callback) {
-                    const newActive = activeIsA ? videoA : videoB;
-                    newActive.onended = () => {
-                        if (pendingCallback) {
-                            const cb = pendingCallback;
-                            pendingCallback = null;
-                            cb();
-                        }
-                    };
-                    pendingCallback = callback;
-                }
-            };
-            bufferVideo.addEventListener('canplaythrough', onReady, { once: true });
-        }
-
-        function switchVideo(file, muted, onFinished) {
-            if (switching) return;
-            switching = true;
-            prepareSwitch(file, muted, onFinished);
-        }
-
-        // Inisialisasi: tampilkan sapaan tanpa suara di videoA
-        const sapaan = videoCache['sapaan.mp4'];
-        if (sapaan) {
-            videoA.src = sapaan.src;
-            videoA.muted = true;
-            videoA.currentTime = 0;
-            videoA.load();
-            videoA.play().catch(console.warn);
-            videoA.style.zIndex = 2;
-            videoB.style.zIndex = 1;
-            activeIsA = true;
-        }
-
-        // ========== PERTANYAAN (tidak berubah) ==========
         function getVideoFile(questionText, title = null) {
-            if (questionText.includes('Halo')) return 'sapaan.mp4';
+            if (questionText.includes('Halo, ini adalah Sistem Pembelajaran Digital')) return 'sapaan.mp4';
             if (questionText === 'Hari ini kamu teh mau belajar apa?') return 'kelas.mp4';
             if (title === 'UI/UX Design' && questionText.includes('Di UI/UX Design ini')) return 'subtopik_uiux.mp4';
             if (questionText === 'Kamu ingin fokus ka bagian mana?') return 'fokus_uiux.mp4';
@@ -355,6 +307,26 @@
             return null;
         }
 
+        function playVideo(file, muted, onFinished) {
+            if (!file) {
+                if (onFinished) onFinished();
+                return;
+            }
+            avatarVideo.pause();
+            avatarVideo.src = `Video/${file}`;
+            avatarVideo.muted = muted;
+            avatarVideo.loop = false;
+            avatarVideo.onended = () => {
+                if (onFinished) onFinished();
+            };
+            avatarVideo.onerror = () => {
+                console.warn(`Video ${file} tidak ditemukan`);
+                if (onFinished) onFinished();
+            };
+            avatarVideo.play().catch(e => console.warn(`Gagal memutar ${file}:`, e));
+        }
+
+        // ========== LOGIKA PERTANYAAN ==========
         const kelasQuestion = {
             type: 'options',
             text: 'Hari ini kamu teh mau belajar apa?',
@@ -415,9 +387,10 @@
             div.innerHTML = `<div class="bubble">${content}</div>`;
             chatDiv.appendChild(div);
             chatDiv.scrollTop = chatDiv.scrollHeight;
+
             if (playVideoFlag && !waitingForStart) {
                 const videoFile = getVideoFile(msg, title);
-                if (videoFile) switchVideo(videoFile, false, null);
+                if (videoFile) playVideo(videoFile, false, null);
             }
         }
 
@@ -427,6 +400,7 @@
             div.innerHTML = `<div class="bubble">${msg}</div>`;
             chatDiv.appendChild(div);
             chatDiv.scrollTop = chatDiv.scrollHeight;
+            avatarVideo.pause();
         }
 
         function showOptions(options, onSelect) {
@@ -447,12 +421,14 @@
 
         function askNextQuestion() {
             if (currentStepIndex >= currentQuestions.length) {
+                // ========== SIMPAN SEMUA DATA KE LOCALSTORAGE ==========
                 if (answers.kelas) localStorage.setItem('user_selected_class', answers.kelas);
                 if (answers.subtopik) localStorage.setItem('user_selected_subtopik', answers.subtopik);
                 if (answers.fokus) localStorage.setItem('user_selected_fokus', answers.fokus);
                 if (answers.tujuan) localStorage.setItem('user_selected_tujuan', answers.tujuan);
                 if (answers.level) localStorage.setItem('user_selected_level', answers.level);
                 if (answers.pendidikan) localStorage.setItem('user_selected_pendidikan', answers.pendidikan);
+                
                 const nama = answers.nama || 'Pengguna';
                 localStorage.setItem('asynchronous_user_name', nama);
                 window.location.href = `register.html?nama=${encodeURIComponent(nama)}`;
@@ -485,7 +461,7 @@
             if (!waitingForStart) return;
             waitingForStart = false;
             addUserMessage("START");
-            switchVideo('sapaan.mp4', false, () => {
+            playVideo('sapaan.mp4', false, () => {
                 showTyping(() => {
                     addBotMessage(kelasQuestion.text, kelasQuestion.title || null, true);
                     showOptions(kelasQuestion.options, (selected) => {
@@ -501,7 +477,8 @@
         }
 
         function resetConversation() {
-            switchVideo('sapaan.mp4', true, null);
+            avatarVideo.pause();
+            avatarVideo.src = '';
             chatDiv.innerHTML = '';
             answers = {};
             waitingForStart = true;
@@ -510,7 +487,7 @@
             currentStepIndex = 0;
             const div = document.createElement('div');
             div.className = 'message bot';
-            div.innerHTML = `<div class="bubble">Halo, ini adalah Sistem Pembelajaran Digital!<br>Sudah siap untuk diajar?<br><div class="options-panel" style="margin-top:12px;"><button class="option-chip" id="startChipBtn">🚀 START</button></div></div>`;
+            div.innerHTML = `<div class="bubble">Halo, ini adalah Sistem Pembelajaran Digital!<br>Sudah siap untuk diajar? Mangga pencet start untuk memulai<br><div class="options-panel" style="margin-top:12px;"><button class="option-chip" id="startChipBtn">🚀 START</button></div></div>`;
             chatDiv.appendChild(div);
             const startBtn = document.getElementById('startChipBtn');
             if (startBtn) {
@@ -521,6 +498,7 @@
                     if (btn) btn.addEventListener('click', startOnboarding);
                 }, 100);
             }
+            playVideo('sapaan.mp4', true, null);
         }
 
         document.getElementById('resetBtn').addEventListener('click', resetConversation);
@@ -538,6 +516,7 @@
         textInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendTextBtn.click();
         });
+
         resetConversation();
     </script>
 </body>
